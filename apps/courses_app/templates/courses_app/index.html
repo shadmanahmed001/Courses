@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Courses</title>
+    <style>
+      h5{
+        display: inline-block;
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Add a new course</h1>
+    <form action="/process" method="post">
+      {% csrf_token %}
+      Name: <input type="text" name="addname" value="enter course name">
+      Description: <input type="textarea" name="adddescript" value="add a description">
+      <input type="submit" name="submit" value="Add">
+    </form>
+
+    <h2>Current Course</h2>
+<div>
+    {% for element in courses %}
+      <h5>Course Name</h5>
+      {{element.course_name}}
+      <h5>Description</h5>
+      {{element.desc}}
+      <h5>Date Added</h5>
+      {{element.created_at}}
+      <h5>Actions</h5>
+      <a href="/confirm/{{element.id}}">Remove</a>
+    {% endfor %}
+</div>
+  </body>
+</html>
